@@ -5,7 +5,7 @@
     ```
 2. Заполнить создать фаил _.env.dev_ в _blog_test/docker/env_ и заполнить по примеру файла [.env.example](docker%2Fenv%2F.env.example)
 
-3. Запустим билд проекта в терминале следующей командой:
+3. Запустим билд проекта в терминале следующей командой(у вас должен быть установлен Docker):
     ```shell
     docker compose -f docker-compose.dev.yml build
     ```
