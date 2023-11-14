@@ -1,34 +1,24 @@
-# Запуск Radise через Docker:
-1. Запуск приложения Docker:
-2. В pyCharm открыть проект:
-3. Создание сервера если не создавался
-```shell
-docker pull redis:latest
-```
+# Для запуска сайта необходимо 
+1. Клонировать проект
+    ```shell
+    git clone https://github.com/lavrik91/Blog.git
+    ```
+2. Заполнить создать фаил _.env.dev_ в _blog_test/docker/env_ и заполнить по примеру файла [.env.example](docker%2Fenv%2F.env.example)
 
-```shell
-docker run --name redis-server -p 6379:6379 -d redis:latest
-```
-Запуск и сотановка сервера Redis
-```shell
-docker start redis-server
-docker stop redis-server
-```
+3. Запустим билд проекта в терминале следующей командой:
+    ```shell
+    docker compose -f docker-compose.dev.yml build
+    ```
+4. После создания образа с контейнерами билд необходимо запустить, делается это следующей командой:
+    ```shell
+    docker compose -f docker-compose.dev.yml up
+    ```
+5. Создание учетной записи администратора из консоли
+    ```shell
+    docker exec -it django sh
+    python manage.py createsuperuser
+    ```
+6. Чтобы комментарии заработали необходимо создать 1 комментарий в админке и удалить его
 
-# Запуск Celery в Django для работы почты
-1. Запускаем redis
-2. Запускаем проект Django
-```shell
-py manage.py runserver
-```
-3. Открываем второй терминал и запускаем Celery
-```shell
-celery --app=blog_test worker --loglevel=info --pool=solo 
 
-```
-# Запуск Celery в Django для запуска отложенных процесов(резервная копия БД)
-Открываем доп терминал и запускаем Celery Beat
-```shell
-celery -A blog_test beat -l info
-```
-Завершить процесс Ctrl+C дважды
+

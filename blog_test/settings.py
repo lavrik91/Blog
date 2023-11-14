@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': env('POSTGRES_DB'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': 'localhost', # env('POSTGRES_HOST'),
+        'HOST': env('POSTGRES_HOST'),
         'PORT': env('POSTGRES_PORT'),
     }
 }
@@ -102,15 +102,15 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://localhost:6379',  # env('REDIS_LOCATION'),
+        'LOCATION': env('REDIS_LOCATION'),
     }
 }
 # END Redis
 
 # Celery settings
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0', # env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0', # env('CELERY_RESULT_BACKEND')
+CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
 CELERY_ACCEPT_CONTENT = ['application/json']
